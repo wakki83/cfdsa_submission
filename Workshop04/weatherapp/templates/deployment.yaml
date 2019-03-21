@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "weatherapp.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "weatherapp.name" . }}
+    helm.sh/chart: {{ include "weatherapp.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ include "weatherapp.replicas" . }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "weatherapp.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "weatherapp.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.targetPort }}
+              protocol: TCP
+          env:
+            - name: SERVICE_VERSION
+              value: {{ .Values.application.version }}
+            - name: APP_ID
+              value: {{ .Values.application.appId }}
+            - name: DEFAULT_CITY
+              value: {{ include "weatherapp.defaultCity" . }}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+

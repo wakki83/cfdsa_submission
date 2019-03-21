@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: "{{ .Release.Name }}-gw"
+  namespace: default
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts: 
+    - {{ .Values.ingress.host }}
+    port:
+      number: {{ .Values.ingress.port }}
+      protocol: HTTP
+      name: HTTP

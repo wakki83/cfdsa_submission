@@ -1,0 +1,22 @@
+Create and apply deployment
+    kubectl apply -f deployment.yaml
+
+Create and apply service
+    kubectl apply -f service.yaml
+
+Create and apply gateway
+    kubectl apply -f gateway.yaml
+
+Create and apply virtual service
+    kubectl apply -f virtualservice.yaml
+
+Create and apply service entry
+    kubectl apply -f service-entry.yaml
+
+Check pod status
+    kubtctl get pods
+
+Check URLs
+    http://<ingressIP>/
+    http://<ingressIP>/weather
+    http://<ingressIP>/weather/tokyo

@@ -1,0 +1,13 @@
+a) Define namespace
+    kubectl apply -f namespace.yaml
+
+   Deploy mydb-pod and service
+    kubectl apply -f db-deploy.yaml
+
+b) Deploy myapp-pod and service
+    kubectl apply -f app-deploy.yaml
+
+c) Included in part a) and b)
+
+d) Deploy myapp-podv2
+    kubectl apply -f app-deploy-v2.yaml

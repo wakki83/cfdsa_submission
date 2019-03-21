@@ -1,0 +1,28 @@
+Create template
+    helm create weatherapp
+
+Edit files
+    - templates/_helpers.tpl
+    - templates/deployment.yaml
+    - templates/gateway.yaml
+    - templates/service.yaml
+    - templates/NOTES.txt
+    - templates/virtualservice.yaml
+    - Chart.yaml
+    - values.yaml
+    (Delete the rest)
+
+Check output
+    helm install weatherapp --dry-run --debug
+
+Install
+    helm install weatherapp
+
+Wait for pods to be ready
+    kubectl get pods
+
+Test with browser
+    http://<ingress-host>/
+    http://<ingress-host>/ready
+    http://<ingress-host>/health
+    http://<ingress-host>/weather/tokyo

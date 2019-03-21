@@ -1,0 +1,7 @@
+You can access this application from the following URL:
+
+  http://{{.Values.ingress.host}}
+  http://{{.Values.ingress.host}}/health
+  http://{{.Values.ingress.host}}/ready
+  http://{{.Values.ingress.host}}/weather/japan
+
